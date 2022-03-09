@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import ToDoList from './ToDoList/todolist';
+import Wrapper from './Wrapper/Wrapper'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         >
           Learn React
         </a>
-        <ToDoList propchik={1} />
+        <Wrapper />
       </header>
     </div>
   );

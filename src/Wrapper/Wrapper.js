@@ -1,7 +1,7 @@
 import React from 'react';
-import './todolist.css';
+import TodoList from '../ToDoList/todolist'
 
-class ToDoList extends React.Component {
+class Wrapper extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -47,11 +47,12 @@ class ToDoList extends React.Component {
     };
 
     render() {
-        const list = this.state.ToDoArray.map((el, index) => {
-            return <li key={index} className={el.isChecked ? "fin" : ""} onClick={() => this.handleClick(index)}>{el.number}</li>
-        });
-        return <ul>{list}</ul>
+        return (
+            <div>
+                <TodoList />
+            </div>
+        )
     }
 }
 
-export default ToDoList;
+export default Wrapper;
