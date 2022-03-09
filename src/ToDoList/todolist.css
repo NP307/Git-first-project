@@ -7,8 +7,7 @@ ul {
     text-decoration: line-through;
 
 }
-button {
-    height: 50px;
-    width: 50px;
-
+.pointerMouse {
+    cursor: pointer;
+    user-select: none;
 }
