@@ -5,7 +5,6 @@ class Wrapper extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLol: false,
             ToDoArray: [
                 {
                     number: 11111,
@@ -31,25 +30,23 @@ class Wrapper extends React.Component {
         }
     }
 
-    handleClick(index) {
+    handleClick = (index) => {
         this.setState((state) => {
             const array = state.ToDoArray;
             array[index] = {
                 ...array[index],
                 isChecked: !array[index].isChecked
             };
-            console.log(array[index]);
             return {
                 ToDoArray: [...array]
             }
         });
-
     };
 
     render() {
         return (
             <div>
-                <TodoList />
+                <TodoList ToDoArray={this.state.ToDoArray} handleClick={this.handleClick} />
             </div>
         )
     }
