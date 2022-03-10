@@ -11,3 +11,6 @@ ul {
     cursor: pointer;
     user-select: none;
 }
+.textAlign {
+    text-align: left;
+}
