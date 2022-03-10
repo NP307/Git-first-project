@@ -1,5 +1,6 @@
 import React from 'react';
-import TodoList from '../ToDoList/todolist'
+import TodoList from '../ToDoList/ToDoList';
+import { Link } from "react-router-dom";
 
 class Wrapper extends React.Component {
     constructor(props) {
@@ -47,6 +48,9 @@ class Wrapper extends React.Component {
         return (
             <div>
                 <TodoList ToDoArray={this.state.ToDoArray} handleClick={this.handleClick} />
+                <Link className="App-link" to="/">
+                    <p>Go to Homepage</p>
+                </Link>
             </div>
         )
     }
