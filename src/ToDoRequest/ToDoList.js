@@ -1,5 +1,5 @@
 import React from 'react';
-import '../ToDoList/ToDoList.css'
+import '../ToDoList/ToDoList.css';
 
 class ToDoRequest extends React.Component {
     constructor(props) {
@@ -35,6 +35,22 @@ class ToDoRequest extends React.Component {
 
     render() {
         const { list, currentUserId } = this.state;
+        const indexList = list.reduce((acc, item) => {
+            if(acc.includes(item.userId)) {
+                return [
+                    ...acc
+                ]
+            } else {
+                return [
+                    ...acc,
+                    item.userId
+                ]
+            }
+        }, []).map((item) => {
+            return (
+                <button key={item} className="textAlign" onClick={() => {changeUserId(item)}}>{item}</button>
+            )
+        });
         const showListById = (id) => {
             return list.filter((item) => {
                 if (id === 0) {
@@ -52,9 +68,7 @@ class ToDoRequest extends React.Component {
         if(list.length !== 0){
             return (
                 <>
-                    <button className="textAlign" onClick={() => {changeUserId(1)}}>1</button>
-                    <button className="textAlign" onClick={() => {changeUserId(2)}}>2</button>
-                    <button className="textAlign" onClick={() => {changeUserId(3)}}>3</button>
+                    {indexList}
                     <button className="textAlign" onClick={() => {changeUserId(0)}}>All</button>
                     <ul className="textAlign" >{showListById(currentUserId)}</ul>
                 </>
