@@ -20,18 +20,18 @@ class ToDoRequest extends React.Component {
             })
     }
 
-    /*handleClick = (index) => {
+    handleClick = (index) => {
         this.setState((state) => {
-            const array = state.ToDoArray;
+            const array = state.list;
             array[index] = {
                 ...array[index],
-                isChecked: !array[index].isChecked
+                completed: !array[index].completed
             };
             return {
-                ToDoArray: [...array]
+                list: [...array]
             }
         });
-    };*/
+    };
 
     render() {
         const { list, currentUserId } = this.state;
@@ -43,7 +43,7 @@ class ToDoRequest extends React.Component {
                     return item.userId === id
                 }
             }).map((item, index) => {
-                return <li key={index}>{item.userId + '. ' +item.title}</li>
+                return <li key={index} className={item.completed ? "fin pointerMouse" : "pointerMouse"} onClick={() => this.handleClick(index)} >{item.userId + '. ' +item.title}</li>
             })
         };
         const changeUserId = (id) => {
