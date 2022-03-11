@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoList from '../ToDoList/ToDoList';
+import ToDoRequest from '../ToDoRequest/ToDoList'
 import { Link } from "react-router-dom";
 
 class Wrapper extends React.Component {
@@ -47,10 +48,11 @@ class Wrapper extends React.Component {
     render() {
         return (
             <div>
-                <TodoList ToDoArray={this.state.ToDoArray} handleClick={this.handleClick} />
                 <Link className="App-link" to="/">
                     <p>Go to Homepage</p>
                 </Link>
+                <TodoList ToDoArray={this.state.ToDoArray} handleClick={this.handleClick} />
+                <ToDoRequest />
             </div>
         )
     }

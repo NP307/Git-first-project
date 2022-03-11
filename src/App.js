@@ -2,7 +2,6 @@ import './App.css';
 import Wrapper from './Wrapper/Wrapper';
 import Logo from './Logo';
 import { Routes, Route } from "react-router-dom";
-import ToDoRequest from "./ToDoRequest/ToDoList";
 
 
 function App() {
@@ -13,7 +12,6 @@ function App() {
           <Route path='/' element={<Logo />} />
           <Route path='/todolist' element={<Wrapper />} />
         </Routes>
-        <ToDoRequest />
       </header>
     </div>
   );
