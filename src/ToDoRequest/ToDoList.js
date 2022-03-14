@@ -4,10 +4,12 @@ import '../ToDoList/ToDoList.css';
 class ToDoRequest extends React.Component {
     constructor(props) {
         super(props);
+        this.textChange = this.textChange.bind(this);
         this.state = {
             list: [],
-            currentUserId: 0
-        }
+            currentUserId: 0,
+            textCheck: ''
+        };
     }
 
     componentDidMount() {
@@ -31,6 +33,10 @@ class ToDoRequest extends React.Component {
                 list: [...array]
             }
         });
+    };
+
+    textChange = (event) => {
+        this.setState({textCheck: event.target.value})
     };
 
     render() {
@@ -58,8 +64,12 @@ class ToDoRequest extends React.Component {
                 } else {
                     return item.userId === id
                 }
+            }).filter((item) => {
+                if (item.title.includes(this.state.textCheck)) {
+                    return item.title
+                }
             }).map((item, index) => {
-                return <li key={index} className={item.completed ? "fin pointerMouse" : "pointerMouse"} onClick={() => this.handleClick(index)} >{item.userId + '. ' +item.title}</li>
+                return <li key={index} className={item.completed ? "fin pointerMouse" : "pointerMouse"} onClick={() => this.handleClick(index)} >{item.userId + '. ' + item.title}</li>
             })
         };
         const changeUserId = (id) => {
@@ -70,6 +80,7 @@ class ToDoRequest extends React.Component {
                 <>
                     {indexList}
                     <button className="textAlign" onClick={() => {changeUserId(0)}}>All</button>
+                    <input name='text' type='text' value={this.state.textCheck} onChange={this.textChange} />
                     <ul className="textAlign" >{showListById(currentUserId)}</ul>
                 </>
             )
