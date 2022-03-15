@@ -2,6 +2,9 @@ import React from 'react';
 import TodoList from '../ToDoList/ToDoList';
 import ToDoRequest from '../ToDoRequest/ToDoList'
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import {INC, DEC, AINC} from '../actions';
+import {bindActionCreators} from 'redux';
 
 class Wrapper extends React.Component {
     constructor(props) {
@@ -32,6 +35,16 @@ class Wrapper extends React.Component {
         }
     }
 
+    inc = () => {
+        this.props.Inc();
+    };
+    dec = () => {
+        this.props.Dec();
+    };
+    aInc = () => {
+        this.props.aInc();
+    };
+
     handleClick = (index) => {
         this.setState((state) => {
             const array = state.ToDoArray;
@@ -48,6 +61,7 @@ class Wrapper extends React.Component {
     render() {
         return (
             <div>
+                <p onClick={this.inc}>{this.props.count}</p>
                 <Link className="App-link" to="/">
                     <p>Go to Homepage</p>
                 </Link>
@@ -58,4 +72,14 @@ class Wrapper extends React.Component {
     }
 }
 
-export default Wrapper;
+function mapStateToProps(state) {
+    return {
+        count: state.count,
+    };
+}
+
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({Inc: INC, Dec: DEC, aInc: AINC}, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Wrapper);
