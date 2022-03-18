@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import {Provider} from 'react-redux';
 import {createStore} from "@reduxjs/toolkit";
-import {INCREMENT, DECREMENT, A_INCREMENT} from "./types";
 
 const initialState = {
     count: 0,
@@ -14,12 +13,8 @@ const initialState = {
 
 function reducer(state = initialState, action) {
     switch (action.type) {
-        case INCREMENT:
-            return { count: state.count + 1 };
-        case DECREMENT:
-            return { count: state.count - 1 };
-        case A_INCREMENT:
-            return { count: state.count + 5 };
+        case 'INCREMENT':
+            return { count: action.isIncrement ? state.count + action.number : state.count - action.number };
 
         default: return state;
     }

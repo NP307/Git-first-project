@@ -1,15 +1,16 @@
 import React from 'react';
 import TodoList from '../ToDoList/ToDoList';
-import ToDoRequest from '../ToDoRequest/ToDoList'
+import ToDoRequest from '../ToDoRequest/ToDoList';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import {INC, DEC, AINC} from '../actions';
-import {bindActionCreators} from 'redux';
+import { Inc } from '../useActions';
 
 class Wrapper extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            number: 1,
+            math: true,
             ToDoArray: [
                 {
                     number: 11111,
@@ -35,16 +36,6 @@ class Wrapper extends React.Component {
         }
     }
 
-    inc = () => {
-        this.props.Inc();
-    };
-    dec = () => {
-        this.props.Dec();
-    };
-    aInc = () => {
-        this.props.aInc();
-    };
-
     handleClick = (index) => {
         this.setState((state) => {
             const array = state.ToDoArray;
@@ -58,10 +49,20 @@ class Wrapper extends React.Component {
         });
     };
 
+    mathFunc = (event) => {
+        this.setState({number: event.target.value});
+    };
+
     render() {
+        const { number, math } = this.state;
         return (
             <div>
-                <p onClick={this.inc}>{this.props.count}</p>
+                <p onClick={() => Inc.call(this, Number(number), math)}>{this.props.count}</p>
+                <input name='number' type="text" value={number} onChange={this.mathFunc}/>
+                <div>
+                    <input defaultChecked type="radio" name='math' value='true' onClick={() => {this.setState({math: true})}}/>
+                    <input type="radio" name='math' value='false' onClick={() => {this.setState({math: false})}}/>
+                </div>
                 <Link className="App-link" to="/">
                     <p>Go to Homepage</p>
                 </Link>
@@ -78,8 +79,4 @@ function mapStateToProps(state) {
     };
 }
 
-function matchDispatchToProps(dispatch) {
-    return bindActionCreators({Inc: INC, Dec: DEC, aInc: AINC}, dispatch);
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(Wrapper);
+export default connect(mapStateToProps)(Wrapper);

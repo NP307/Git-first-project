@@ -1,29 +1,32 @@
 import logo from './logo.svg';
 import { Link } from "react-router-dom";
-import {INC, DEC, AINC} from "./actions";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import React from 'react';
+import {Inc} from "./useActions";
 
 class Logo extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            number: 1,
+            math: true,
+        }
     }
 
-    inc = () => {
-        this.props.Inc();
-    };
-    dec = () => {
-        this.props.Dec();
-    };
-    aInc = () => {
-        this.props.aInc();
+    mathFunc = (event) => {
+        this.setState({number: event.target.value});
     };
 
     render() {
+        const { number, math } = this.state;
         return (
             <div>
-                <p onClick={this.dec}>{this.props.count}</p>
+                <p onClick={() => Inc.call(this, Number(number), math)}>{this.props.count}</p>
+                <input name='number' type="text" value={number} onChange={this.mathFunc}/>
+                <div>
+                    <input defaultChecked type="radio" name='math' value='true' onClick={() => {this.setState({math: true})}}/>
+                    <input type="radio" name='math' value='false' onClick={() => {this.setState({math: false})}}/>
+                </div>
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>
                     Edit <code>src/App.js</code> and save to reload.
@@ -50,8 +53,4 @@ function mapStateToProps(state) {
     }
 }
 
-function matchDispatchToProps(dispatch) {
-    return bindActionCreators({Inc: INC, Dec: DEC, aInc: AINC}, dispatch);
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(Logo);
+export default connect(mapStateToProps)(Logo);
