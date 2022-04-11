@@ -5,22 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import {Provider} from 'react-redux';
-import {createStore} from "@reduxjs/toolkit";
+import {applyMiddleware, createStore} from "@reduxjs/toolkit";
+import thunk from 'redux-thunk';
+import {combineReducers} from "redux/es/redux";
+import { reducer } from "./Logo";
 
-const initialState = {
-    count: 0,
-};
+const reducers = combineReducers({first: reducer});
 
-function reducer(state = initialState, action) {
-    switch (action.type) {
-        case 'INCREMENT':
-            return { count: action.isIncrement ? state.count + action.number : state.count - action.number };
-
-        default: return state;
-    }
-}
-
-const store = createStore(reducer);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
   <React.StrictMode>
