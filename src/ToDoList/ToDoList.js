@@ -101,7 +101,7 @@ class ToDoRequest extends React.Component {
         }
         else {
             return (
-                <div>Wait please</div>
+                <div>Wait please </div>
             )
         }
     }
