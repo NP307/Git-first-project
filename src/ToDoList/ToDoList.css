@@ -12,5 +12,7 @@ ul {
     user-select: none;
 }
 .textAlign {
+    width: 75%;
     text-align: left;
+    margin: 50px auto;
 }

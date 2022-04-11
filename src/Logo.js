@@ -1,14 +1,28 @@
-import logo from './logo.svg';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import React from 'react';
 import {Inc} from "./useActions";
 
+const initialState = {
+    count: 0,
+    number: 12
+};
+
+export function reducer(state = initialState, action) {
+
+    switch (action.type) {
+        case 'INCREMENT':
+            return { count: action.isIncrement ? state.count + action.number : state.count - action.number };
+
+        default: return state;
+    }
+}
+
 class Logo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            number: 1,
+            number: '',
             math: true,
         }
     }
@@ -20,36 +34,32 @@ class Logo extends React.Component {
     render() {
         const { number, math } = this.state;
         return (
-            <div>
-                <p onClick={() => Inc.call(this, Number(number), math)}>{this.props.count}</p>
-                <input name='number' type="text" value={number} onChange={this.mathFunc}/>
-                <div>
-                    <input defaultChecked type="radio" name='math' value='true' onClick={() => {this.setState({math: true})}}/>
-                    <input type="radio" name='math' value='false' onClick={() => {this.setState({math: false})}}/>
+            <>
+                <div className="incDecPosition">
+                    <p className='numberGet' onClick={() => Inc.call(this, Number(number), math)}>{this.props.count}</p>
+                    <input name='numberWrite' type="text" value={number} onChange={this.mathFunc}/>
+                    <div className="radioButtonWrapper">
+                        <label>
+                            <input id='incNumber' defaultChecked type="radio" name='math' value='true' onClick={() => {this.setState({math: true})}}/>
+                            <p>+</p>
+                        </label>
+                        <label>
+                            <input id='decNumber' type="radio" name='math' value='false' onClick={() => {this.setState({math: false})}}/>
+                            <p>-</p>
+                        </label>
+                    </div>
                 </div>
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-                <Link className="App-link" to="todolist">
-                    <p>Go to list</p>
+                <Link className="App-link" to="/todolist">
+                    <p>Show list</p>
                 </Link>
-            </div>
+            </>
         );
     }
 }
 
 function mapStateToProps(state) {
     return {
-        count: state.count
+        count: state.first.count
     }
 }
 

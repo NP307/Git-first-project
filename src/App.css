@@ -18,10 +18,79 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.incDecPosition {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.incDecPosition .radioButtonWrapper {
+  display: flex;
+}
+
+.incDecPosition .radioButtonWrapper input {
+  display: none;
+}
+
+.incDecPosition .numberGet {
+  user-select: none;
+}
+
+.incDecPosition .radioButtonWrapper p {
+  color: black;
+  background-color: white;
+  border: solid 1px black;
+  width: 25px;
+  height: 25px;
+  line-height: 75%;
+  transition-duration: 500ms;
+  user-select: none;
+}
+.incDecPosition .radioButtonWrapper input:checked + p {
+  background-color: red;
+  transition-duration: 500ms;
+}
+
+.incDecPosition > * {
+  margin: 0 5px;
+}
+
+.incDecPosition .numberGet + input {
+  height: 25px;
+}
+
+.incDecPosition .numberGet {
+  font-size: 50px;
+}
+
+.textFilters {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 75%;
+  margin: auto;
+}
+
+.textFilters > div {
+  display: flex;
+  margin: 10px 0;
+}
+
+.textFilters > div p {
+  margin: 0 25px 0 0 ;
+  font-size: 20px;
+}
+
+.textFilters > * {
+  margin: 0 5px;
+}
+
+.buttonFilter {
+  background-color: red;
 }
 
 .App-link {
